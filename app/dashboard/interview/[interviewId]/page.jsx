@@ -4,8 +4,9 @@ import { MockInterview } from '@/utils/schema';
 import React, { useEffect, useState } from 'react';
 import { eq } from 'drizzle-orm';
 import Webcam from 'react-webcam';
-import { WebcamIcon } from 'lucide-react';
+import { WebcamIcon, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link'; // Importing Link
 
 function Interview({ params }) {
   const [interviewData, setInterviewData] = useState(null);
@@ -44,7 +45,7 @@ function Interview({ params }) {
   };
 
   return (
-    <div className="my-10 flex justify-center flex-col items-center">
+    <div className="my-10 ">
       <h2 className="font-bold text-2xl">Let's get started</h2>
 
 {/* grid main */}
@@ -60,10 +61,11 @@ function Interview({ params }) {
             </div>
           )}
 
-          <div className="div">
-
+          <div className="p-5 border rounded-lg border-yellow-300 bg-yellow-100">
+               <h2 className='flex gap-2 items-centre text-yellow-500'><Lightbulb/><strong>Information</strong></h2>
+               <h2 className='mt-3 text-yellow-500'>{process.env.NEXT_PUBLIC_INFORMATION} </h2>
           </div>
-          {/* 1:56 min */}
+         
         </div>
 {/* right screen */}
 
@@ -82,11 +84,16 @@ function Interview({ params }) {
             <>
               <WebcamIcon className="h-72 w-72 my-7 p-20 bg-secondary rounded-lg border" />
               {webCamError && <div className="text-red-500">Failed to access webcam. Please check your permissions.</div>}
-              <Button onClick={() => setWebcamEnabled(true)}>Enable Web Cam and Microphone</Button>
+              <Button variant="ghost" onClick={() => setWebcamEnabled(true)}>Enable Web Cam and Microphone</Button>
             </>
           )}
         </div>
       </div>
+      <div className='flex justify-end items-end'>
+      <Link href={'/dashboard/interview/'+params.interviewId+'/start'}>
+      <Button>Start Interview</Button>
+      </Link>
+          </div>
     </div>
   );
 }

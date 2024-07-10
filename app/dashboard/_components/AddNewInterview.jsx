@@ -27,7 +27,7 @@ function AddNewInterview() {
     const [jobExperience,setJobExperience]=useState();
     const [loading,setLoading]=useState(false);
     const [jsonResponse,setJsonResponse]=useState([]);
-    const router=useRouter
+    const router=useRouter(); 
     const {user}=useUser();
 
     
