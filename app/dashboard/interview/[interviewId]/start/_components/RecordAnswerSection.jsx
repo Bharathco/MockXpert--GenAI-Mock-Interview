@@ -41,12 +41,12 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex,intervie
       {
         UpdateUserAnswer();
       }
-       if(userAnswer?.length<10)
-      {
-        setLoading(false);
-        toast('Error while saving your answer, Please Record again')
-        return;
-      }
+      //  if(userAnswer?.length<10)
+      // {
+      //   setLoading(false);
+      //   toast('Error while saving your answer, Please Record again')
+      //   return;
+      // }
   },[userAnswer])
 
   const StartStopRecording=async()=>{
