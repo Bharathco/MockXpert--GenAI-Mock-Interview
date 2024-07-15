@@ -42,8 +42,8 @@ function Feedback({params}) {
       <h2 className='font-bold text-2xl'>Here is your interview feedback</h2>
       <h2 className='text-primary text-lg my-3'>Your overall interview rating: <strong></strong> </h2>
       <h2 className='text-sm text-gray-500' >find below interview question with correct answer, Your answer and feedback for improvement </h2>
-      {feedbackList&&feedbackList.map((item,index)=>(
-         <Collapsible key={index} className='mt-7'>
+      {feedbackList&&feedbackList.map((item,Index)=>(
+         <Collapsible key={Index} className='mt-7'>
            <CollapsibleTrigger className='p-2 bg-secondary rounded-lg justify-between my-2 text-left gap-7 w-full'>
            {item.question} <ChevronsUpDown className='h-5 w-5'/>
            </CollapsibleTrigger>
