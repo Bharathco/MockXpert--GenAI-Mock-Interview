@@ -1,7 +1,7 @@
 "use client";
 import Webcam from 'react-webcam';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import useSpeechToText from 'react-hook-speech-to-text';
 import { Mic, StopCircle } from 'lucide-react';
@@ -35,21 +35,7 @@ function RecordAnswerSection({ mockInterviewQuestion, activeQuestionIndex, inter
     ));
   }, [results]);
 
-  useEffect(() => {
-    if (!isRecording && userAnswer.length > 10) {
-      UpdateUserAnswer();
-    }
-  }, [userAnswer]);
-
-  const StartStopRecording = async () => {
-    if (isRecording) {
-      stopSpeechToText();
-    } else {
-      startSpeechToText();
-    }
-  };
-
-  const UpdateUserAnswer = async () => {
+  const UpdateUserAnswer = useCallback(async () => {
     console.log(userAnswer);
     setLoading(true);
     const feedbackPrompt = `Question: ${mockInterviewQuestion[activeQuestionIndex]?.question}, User Answer: ${userAnswer}. Based on the question and user answer for the given interview question, please give us a rating for the answer and feedback in the area of improvement, if any, in just 3 to 5 lines in JSON format with rating field and feedback field.`;
@@ -78,6 +64,20 @@ function RecordAnswerSection({ mockInterviewQuestion, activeQuestionIndex, inter
     }
     setResults([]);
     setLoading(false);
+  }, [userAnswer, mockInterviewQuestion, activeQuestionIndex, interviewData, user?.primaryEmailAddress?.emailAddress, setResults]);
+
+  useEffect(() => {
+    if (!isRecording && userAnswer.length > 10) {
+      UpdateUserAnswer();
+    }
+  }, [isRecording, userAnswer, UpdateUserAnswer]);
+
+  const StartStopRecording = async () => {
+    if (isRecording) {
+      stopSpeechToText();
+    } else {
+      startSpeechToText();
+    }
   };
 
   return (
