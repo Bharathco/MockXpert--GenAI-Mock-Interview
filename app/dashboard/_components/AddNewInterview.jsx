@@ -89,6 +89,7 @@ function AddNewInterview() {
 
   return (
     <div>
+      <p className='relative bottom-2 border p-2 rounded-lg'>This is <span className='text-[#dc4848] font-semibold '>Beta </span>version, please use a Laptop for seemless experience</p>
       <div className='p-10 border rounded-lg bg-secondary
      hover:scale-105 hover:shadow-md cursor-pointer 
      transition-all' 

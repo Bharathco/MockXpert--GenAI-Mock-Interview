@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-10" style={{ backgroundImage: 'url(https://sheltonfleming.com/wp-content/uploads/2023/04/BLOG-POST-Interview-with-an-AI-featured-image.png)' }}>
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-10 " style={{ backgroundImage: 'url(https://sheltonfleming.com/wp-content/uploads/2023/04/BLOG-POST-Interview-with-an-AI-featured-image.png) ' }}>
       <div className="absolute inset-0 bg-black opacity-75"></div>
       <div className="relative z-10 text-white text-center">
       <h1 className="text-4xl md:text-6xl font-semibold mb-5">
