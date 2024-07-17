@@ -33,43 +33,58 @@ function AddNewInterview() {
     
 
 
-    const onSubmit=async(e)=>{
-      setLoading(true)
-        e.preventDefault()
-        console.log(jobPosition, jobDesc, jobExperience)
-
-        const InputPromt="Job Position: "+jobPosition+", Job Description: "+jobDesc+", Years of Experience: "+jobExperience+", Depending on this information please give me "+process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT+" interview questions with answers in JSON format, Give question and answer as field in JSON and no need to provide any extra note"
-        
-        const result=await chatSession.sendMessage(InputPromt);
-
-        const MockJsonResp=(result.response.text()).replace('```json','').replace('```','');
-
-        console.log(JSON.parse(MockJsonResp));
-        setJsonResponse(MockJsonResp);
-
-        if(MockJsonResp){
-        const resp=await db.insert(MockInterview)
-        .values({
-          mockId:uuidv4(),
-          jsonMockResp:MockJsonResp,
-          jobPosition:jobPosition,
-          jobDesc:jobDesc,
-          jobExperience:jobExperience,
-          createdBy:user?.primaryEmailAddress?.emailAddress,
-          createdAt:moment().format('DD-MM-YYYY')
-
-        }).returning({mockId:MockInterview.mockId});
-
-       console.log("Inserted ID:",resp) 
-       if(resp)
-       {
-        setOpenDialog(false);
-        router.push('/dashboard/interview/'+resp[0]?.mockId)
-       }
+    const onSubmit = async (e) => {
+      setLoading(true);
+      e.preventDefault();
+      console.log(jobPosition, jobDesc, jobExperience);
+    
+      const InputPromt = `Job Position: ${jobPosition}, Job Description: ${jobDesc}, Years of Experience: ${jobExperience}, Depending on this information please give me ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} interview questions with answers in JSON format. Give question and answer as fields in JSON and no need to provide any extra note`;
+    
+      try {
+        const result = await chatSession.sendMessage(InputPromt);
+        const responseText = await result.response.text();
+        console.log('Response Text:', responseText);
+    
+        // Clean the response text to remove unnecessary parts
+        const mockJsonResp = responseText.replace('```json', '').replace('```', '');
+        console.log('Cleaned JSON:', mockJsonResp);
+    
+        // Validate and parse the JSON response
+        let parsedJson;
+        try {
+          parsedJson = JSON.parse(mockJsonResp);
+        } catch (jsonError) {
+          console.error('JSON Parsing Error:', jsonError);
+          toast('Failed to parse JSON response');
+          setLoading(false);
+          return;
+        }
+    
+        setJsonResponse(parsedJson);
+    
+        const resp = await db.insert(MockInterview).values({
+          mockId: uuidv4(),
+          jsonMockResp: JSON.stringify(parsedJson), // Ensure it is stored as a string
+          jobPosition: jobPosition,
+          jobDesc: jobDesc,
+          jobExperience: jobExperience,
+          createdBy: user?.primaryEmailAddress?.emailAddress,
+          createdAt: moment().format('DD-MM-YYYY')
+        }).returning({ mockId: MockInterview.mockId });
+    
+        console.log("Inserted ID:", resp);
+        if (resp) {
+          setOpenDialog(false);
+          router.push('/dashboard/interview/' + resp[0]?.mockId);
+        }
+      } catch (error) {
+        console.error('API Error:', error);
+        toast('An error occurred while submitting the interview');
       }
-
-        setLoading(false);
-    }
+    
+      setLoading(false);
+    };
+    
 
 
   return (
