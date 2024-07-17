@@ -111,7 +111,7 @@ function RecordAnswerSection({ mockInterviewQuestion, activeQuestionIndex, inter
             Record Answer</h2>}
       </Button>
       
-      <p className='relative bottom-5'>This is <span className='text-[#dc4848] font-semibold'>Beta</span> version please us a Laptop for seemless experience</p>
+      <p className='relative bottom-5'>This is <span className='text-[#dc4848] font-semibold'>Beta</span> version please use a Laptop for seemless experience</p>
     </div>
   );
 }
