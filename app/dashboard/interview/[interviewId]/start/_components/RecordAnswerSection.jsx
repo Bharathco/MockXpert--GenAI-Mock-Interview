@@ -110,6 +110,8 @@ function RecordAnswerSection({ mockInterviewQuestion, activeQuestionIndex, inter
           <h2 className='text-primary flex gap-2 items-center'><Mic />
             Record Answer</h2>}
       </Button>
+      
+      <p className='relative bottom-5'>This is <span className='text-[#dc4848] font-semibold'>Beta</span> version please us a Laptop for seemless experience</p>
     </div>
   );
 }
