@@ -3,7 +3,7 @@ import { UserButton } from '@clerk/nextjs'
  import Image from 'next/image'
  import { usePathname } from 'next/navigation'
  import React, { useEffect } from 'react'
-
+ import logo from 'next/image'
 function Header() {
     const path=usePathname();
     useEffect(()=>{
@@ -12,7 +12,10 @@ function Header() {
 
   return (
     <div className='flex p-4 items-center justify-between bg-secondary shadow-sm'>
-      <Image src={'/logo.svg'} width={160} height={100} alt='logo'/>
+
+      <Image src={'/mockXpert_Logo.png'} width={160} height={100} alt='logo'/>
+      
+      {/* <Image src={'/logo.svg'} width={160} height={100} alt='logo'/> */}
       <ul className='hidden md:flex gap-6'>
       <li 
            className={`hover:text-primary hover:font-bold transition-all cursor-pointer 
