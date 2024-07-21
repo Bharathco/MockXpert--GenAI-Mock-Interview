@@ -1,27 +1,31 @@
 // page.js
+"use client"
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import Navbar from './components/Navbar';
+import FeatureSection from './components/howItWorks';
+import HeroSection from './components/HeroSection';
+import Footer from './components/Footer';
+import Testimonials from './components/Testimonials';
+
+
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-10 " style={{ backgroundImage: 'url(https://sheltonfleming.com/wp-content/uploads/2023/04/BLOG-POST-Interview-with-an-AI-featured-image.png) ' }}>
-      <div className="absolute inset-0 bg-black opacity-75"></div>
-      <div className="relative z-10 text-white text-center">
-      <h1 className="text-4xl md:text-6xl font-semibold mb-5">
-  Welcome to <span className='text-[#dc4848]'>MockXpert</span>
-</h1>
-
-        <p className="text-lg mb-10 max-w-2xl">
-          Prepare for your next job interview with our AI-powered mock interview platform. 
-          Practice answering common interview questions and receive feedback to improve your performance.
-        </p>
-        <Link href="/dashboard">
-          <Button className="px-6 py-3 text-lg font-medium text-white bg-[#dc4848] rounded-lg hover:bg-[#dc4848]">
-            Go to Dashboard
-          </Button>
-        </Link>
+    <>
+    <div class="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+    <Navbar/>
+   
+    <hr></hr>
+    <div className="max-w-7xl mx-auto pt-20 px-6">
+        <HeroSection />
+         <br></br>
+        <hr className='text-black'></hr>
+        <FeatureSection />
+        <Footer/>        
       </div>
-    </div>
+   
+    </>
   );
 }
