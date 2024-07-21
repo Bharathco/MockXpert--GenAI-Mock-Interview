@@ -23,14 +23,14 @@ function Header() {
 
               > Dashboard
           </li>
-        <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer 
+        {/* <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer 
               ${path === '/dashboard/questions' ? 'text-primary font-bold' : ''}`}
 
               >Questions</li>
         <li  className={`hover:text-primary hover:font-bold transition-all cursor-pointer 
               ${path === '/dashboard/upgrade' ? 'text-primary font-bold' : ''}`}
 
-              >Upgrade</li>
+              >Upgrade</li> */}
         <li  className={`hover:text-primary hover:font-bold transition-all cursor-pointer 
               ${path === '/dashboard/how' ? 'text-primary font-bold' : ''}`}
 
